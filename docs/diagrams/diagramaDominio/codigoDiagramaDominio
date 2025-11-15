@@ -1,0 +1,123 @@
+classDiagram
+%% ====== Entidades principales del dominio ======
+class User {
+  userName
+  password
+  email
+  authority
+  role
+}
+
+class FriendShip {
++pending
+}
+
+class Profile {
+  location
+  bithDay
+  avatarURL
+  occasionalPlayer
+  description
+}
+
+class Match {
+  code
+  createdAt
+  startedAt
+  finishedAt
+  status
+  numberOfPlayers
+  isPublic
+}
+
+class Player {
+  color
+  isTurn
+  token
+  points
+}
+
+class Board {
+  turno
+  turnoTile
+  tileCount
+  salmonMove
+  canRemoveTile
+  roundPass
+  winner
+}
+
+class Tile {
+  tileType
+  enterRule
+  existsRule
+  obstacle
+  capacity
+  position at x
+  position at y
+}
+
+class Salmon {
+  pair
+  position at x
+  position at y
+}
+
+class EndTile {
+  scoreValue
+}
+
+class Chat {
+  message
+  sentAt
+}
+
+class Invitation {
+  status
+  sentAt
+}
+
+class Statistics {
+  totalGames
+  timePlayed
+  maxTime
+  minTime
+  averageTime
+  totalPoints
+  winnings
+  beats
+}
+
+class Achievement {
+  name
+  difficulty
+  description
+}
+
+class Gender { name }
+class Platform { name }
+class Saga { name }
+
+%% ====== Relaciones de alto nivel (dominio) ======
+User "1" --> "1" Profile : has
+User "1" --> "1" Statistics : has
+User "1" --> "*" Achievement : earns
+User "1" --> "*" Invitation : has
+User "1" --> "*" Match : creates
+
+User "1" --> "0..*" FriendShip : initiated 
+User "1" --> "0..*" FriendShip : received 
+
+Match "1" --> "*" Player : includes
+Match "1" --> "1" Board : has
+Match "1" --> "*" Chat : has
+Invitation "*" --> "1" Match : for
+
+Player "1" --> "1" User : belongsTo
+Board "1" --> "many" Tile : composedOf
+Tile "0.." --> "0.." Salmon : contains
+EndTile <|-- Tile : subtype
+
+Profile "1" --> "0..1" Gender : favourite
+Profile "1" --> "0..1" Platform : favourite
+Profile "1" --> "0..1" Saga : favourite

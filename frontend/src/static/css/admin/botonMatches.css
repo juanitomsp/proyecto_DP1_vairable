@@ -1,0 +1,37 @@
+.botonMatches{
+  background-color: #F5EFE6; 
+  border-radius: 16px;       
+  width: 375px;           
+  padding: 24px;          
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  cursor: pointer;          
+  transition: all 0.3s ease;
+}
+
+.botonMatches:hover {
+  transform: translateY(-5px); 
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); 
+}
+.botonMatches-container {
+  display: flex;           
+  justify-content: center;
+  align-items: center;     
+  gap: 30px;              
+}
+
+.botonMatches-title {
+ 
+  color: #B95A20;
+  font-size: 1.4rem; 
+  font-weight: bold;
+  margin-top: 0;
+  margin-bottom: 20px; 
+}
+
+.botonMatches-description {
+  color: #333;        
+  font-size: 1rem;
+  line-height: 1.5;   
+  margin: 0;
+  text-align: left;
+}

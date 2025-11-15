@@ -1,0 +1,183 @@
+' ==== Enums ====
+enum StatusMatch {
+FINISHED
+PLAYING
+WAITING
+}
+
+enum StatusInvite {
+ACCEPTED
+DENIED
+REQUESTED
+}
+
+enum TilesType {
+ROCK
+BEAR
+START
+RIVER
+EAGLE
+HERON
+RAPIDS
+}
+enum TypeRol {
+ADMIN
+PLAYER
+SPECTATOR
+}
+
+' ==== Clases principales ====
+class User {
++userName
++password
++email
++authority
++role: TypeRol
+}
+class FriendShip {
++pending
+}
+
+class Statistics {
++totalGames
++timePlayed
++maxTime
++minTime
++averageTime
++totalPoints
++winnings
++beats
+}
+
+class Achievement {
++name
++difficulty
++description
+}
+
+class Match {
++code
++createdAt
++startedAt
++finishedAt
++numberOfPlayers
++status: StatusMatch
+}
+
+class Profile {
++location
++birthDay
++avatarURL
++occasionalPlayer
++description
+}
+class Gender {
++name
+}
+class Platform {
++name
+}
+class Saga {
++name
+}
+
+class Invitation {
++status: StatusInvite
++sentAt
+}
+
+class Player {
++color: Color
++isTurn
++token
++points
+}
+
+class Board {
++turno
++turnoTile
++tileCount
++salmonMove
++canRemoveTile
++roundPass
++winner
+}
+
+
+class Tile {
++tileType: TilesType
++enterRule
++exitsRule
++obstacle
++capacity
++position at x
++position at y
+}
+
+class Salmon {
++pair
++image
++position at x
++position at y
+}
+
+class EndTile {
++scoreValue
+}
+
+class Chat {
++message
++sentAt
+}
+
+' ==== Relaciones ====
+
+' Usuario tiene estadísticas y logros
+User "1" -- "1" Statistics : has >
+User "1" -- "*" Achievement : earns >
+
+' Relaciones con User y FriendShip
+User "1" -- "0..*" FriendShip : initiated >
+User "1" -- "0..*" FriendShip : received >
+
+' Usuario y Match
+User "1" -- "*" Match : creates >
+User "1" -- "*" Invitation : has >
+User "1" <|-- "*" Player
+
+' Profile y Gender
+User "1" -- "1" Profile : has >
+
+' Profile y Gender
+Profile "1" -- "1" Gender : favouriteGender >
+' Profile y Platform
+Profile "1" -- "1" Platform : favouritePlatform >
+' Profile y Saga
+Profile "1" -- "1" Saga : favouriteSaga >
+
+' Match con jugadores y chat
+Match "1" -- "*" Player : participates <
+Match "1" -- "1" Chat : has >
+
+' Player con chat
+Player "1" -- "*" Chat : use >
+
+' Match con board
+Match "1" -- "1" Board : has >
+
+' Board con Tile
+Board "1" -- "*" Tile : composed of >
+
+' Tile con Salmon
+Tile "1" -- "*" Salmon : contains >
+
+' EndTile hereda de Tile
+Tile <|-- EndTile
+
+
+' Enumeraciones referenciadas
+Match ..> StatusMatch : uses
+Invitation ..> StatusInvite : uses
+Tile ..> TilesType : uses
+User ..> TypeRol : uses
+@enduml

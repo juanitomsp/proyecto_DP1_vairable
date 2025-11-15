@@ -1,0 +1,91 @@
+.create{
+  min-height: calc(100vh - 15px);
+  display: grid;
+  grid-template-rows: 1fr auto;
+  background: linear-gradient(180deg, var(--green) 80%, var(--light-green) 20%);
+}
+
+.create__hero{
+  display: grid;
+  place-items: center;
+  gap: 24px;
+  padding: 24px 20px 0;
+  text-align: center;
+}
+
+.create__players{
+  display: grid;
+  gap: 14px;
+  justify-items: center;
+}
+
+.create__players-label{
+  color: var(--muted);
+  font-weight: 600;
+  letter-spacing: .06em;
+  line-height: 1.2;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.create__playersControl{
+  display: grid;
+  grid-auto-flow: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.create__playersControl .btn{
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  font-size: 28px;
+  line-height: 1;
+}
+
+.create__playersControl .btn:disabled{
+  opacity: .4;
+  cursor: not-allowed;
+  transform: none; 
+}
+
+.create__playersValue{
+  font-size: 64px;
+  font-weight: 800;
+  letter-spacing: .04em;
+}
+
+.create__playersLabel input[type="checkbox"]{
+  margin-right: 8px;
+  transform: translateY(1px);
+}
+
+.create__footer{
+  margin-top: 32px;
+  display: grid;
+  gap: 12px;
+  justify-items: center;
+  padding: 24px 0 16px;
+  background: "203E46";
+  border-top: 1px solid rgba(255,255,255,.08);
+}
+
+.create__form .btn{
+  min-width: 220px;
+}
+
+.create__error{
+  color: var(--stroke-strong); 
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.create__credits{
+  color: var(--muted);
+  font-size: 12px;
+}
+
+@media (max-width: 600px){
+  .create__playersValue{ font-size: 56px; }
+  .create__playersControl{ gap: 18px; }
+}
